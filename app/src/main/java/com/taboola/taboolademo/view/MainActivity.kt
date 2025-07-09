@@ -1,4 +1,4 @@
-package com.taboola.taboolademo
+package com.taboola.taboolademo.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
