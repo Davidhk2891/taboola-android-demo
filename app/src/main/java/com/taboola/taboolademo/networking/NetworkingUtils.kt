@@ -5,7 +5,7 @@ import java.net.URL
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class NetworkUtils {
+object NetworkingUtils {
 
     fun fetchArticlesJson(): String {
         val urlString = "https://s3-us-west-2.amazonaws.com/taboola-mobile-sdk/public/home_assignment/data.json"

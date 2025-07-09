@@ -26,6 +26,6 @@ object ArticleParser {
             }
         }
 
-        return articles;
+        return articles
     }
 }
