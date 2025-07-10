@@ -1,5 +1,6 @@
-package com.taboola.taboolademo.view
+package com.davidrajchenberg.taboolademo.view
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,20 +20,27 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skydoves.landscapist.glide.GlideImage
-import com.taboola.taboolademo.R
-import com.taboola.taboolademo.model.Article
-import com.taboola.taboolademo.viewmodel.HomeViewModel
+import com.davidrajchenberg.taboolademo.R
+import com.davidrajchenberg.taboolademo.model.Article
+import com.davidrajchenberg.taboolademo.viewmodel.HomeViewModel
+import com.taboola.android.Taboola
+import com.taboola.android.annotations.TBL_PLACEMENT_TYPE
+import com.taboola.android.listeners.TBLClassicListener
+import com.davidrajchenberg.taboolademo.utils.TaboolaConstants
 
 @Composable
 fun ArticleListScreen(
@@ -40,17 +48,83 @@ fun ArticleListScreen(
     viewModel: HomeViewModel = viewModel(),
     onClick: (Int) -> Unit
 ) {
+    val context = LocalContext.current
+
     val articleList by viewModel.articles.collectAsState()
+
+    // Setup Taboola page url to fetch content from
+    val tblClassicPage = remember {
+        Taboola.getClassicPage(
+            TaboolaConstants.PAGE_URL,
+            TaboolaConstants.PAGE_TYPE_ARTICLE
+        )
+    }
+
+    // Setup classic widget unit
+    val classicWidgetUnit = remember {
+        tblClassicPage.buildComposeUnit(
+            context,
+            TaboolaConstants.PLACEMENT_WIDGET_WO_VIDEO,
+            TaboolaConstants.MODE_THUMBS_FEED_01,
+            TBL_PLACEMENT_TYPE.PAGE_MIDDLE,
+            object : TBLClassicListener() {
+                override fun onAdReceiveSuccess() {
+                    Log.d("Taboola classic unit", "classic unit Ad received successfully")
+                }
+
+                override fun onAdReceiveFail(error: String?) {
+                    Log.e("Taboola classic unit", "classic unit Ad failed: $error")
+                }
+            }
+        )
+    }
+
+    // Setup feed unit
+    /*
+    placementName: Feed without video, Feed with video
+    mode: thumbs-feed-01, thumbnails-feed, feed-3x1
+    */
+    val feedUnit = remember {
+        tblClassicPage.buildComposeUnit(
+            context,
+            TaboolaConstants.PLACEMENT_FEED_W_VIDEO,
+            TaboolaConstants.MODE_THUMBS_FEED_01,
+            TBL_PLACEMENT_TYPE.FEED,
+            object: TBLClassicListener() {
+                override fun onAdReceiveSuccess() {
+                    Log.d("Taboola feed unit", "feed unit Ad received successfully")
+                }
+
+                override fun onAdReceiveFail(error: String?) {
+                    Log.e("Taboola feed unit", "feed unit Ad failed: $error")
+                }
+            }
+        )
+    }
+
+    // Fetch content for both units
+    LaunchedEffect(Unit) {
+        classicWidgetUnit.fetchContent()
+        feedUnit.fetchContent()
+    }
+
     // ArticleListScreenMock(articleList = articleList, modifier = modifier)
     LazyColumn(modifier = modifier) {
         itemsIndexed(articleList) { index, article ->
             when (index) {
-                2, 9 -> {
-                    Spacer(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp)
-                    )
+                2 -> {
+                    Box(modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)) {
+                        classicWidgetUnit.GetClassicUnitView()
+                    }
+                }
+                9 -> {
+                    Box(modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)) {
+                        feedUnit.GetClassicUnitView()
+                    }
                 }
                 else -> {
                     ArticleItem(

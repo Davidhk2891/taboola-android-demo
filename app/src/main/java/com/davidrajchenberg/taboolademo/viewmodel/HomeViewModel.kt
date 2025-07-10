@@ -1,10 +1,10 @@
-package com.taboola.taboolademo.viewmodel
+package com.davidrajchenberg.taboolademo.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.taboola.taboolademo.model.Article
-import com.taboola.taboolademo.networking.NetworkingUtils
-import com.taboola.taboolademo.utils.ArticleParser
+import com.davidrajchenberg.taboolademo.model.Article
+import com.davidrajchenberg.taboolademo.networking.NetworkingUtils
+import com.davidrajchenberg.taboolademo.utils.ArticleParser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

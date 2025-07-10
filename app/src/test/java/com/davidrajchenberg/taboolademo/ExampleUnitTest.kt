@@ -1,4 +1,4 @@
-package com.taboola.taboolademo
+package com.davidrajchenberg.taboolademo
 
 import org.junit.Test
 

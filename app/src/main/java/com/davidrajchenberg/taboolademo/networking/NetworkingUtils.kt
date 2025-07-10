@@ -1,4 +1,4 @@
-package com.taboola.taboolademo.networking
+package com.davidrajchenberg.taboolademo.networking
 
 import java.net.HttpURLConnection
 import java.net.URL

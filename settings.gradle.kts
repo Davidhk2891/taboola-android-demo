@@ -16,6 +16,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://taboolapublic.jfrog.io/artifactory/mobile-release")
+        }
     }
 }
 

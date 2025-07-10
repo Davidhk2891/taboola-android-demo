@@ -1,4 +1,4 @@
-package com.taboola.taboolademo.ui.theme
+package com.davidrajchenberg.taboolademo.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,14 +1,13 @@
-package com.taboola.taboolademo.view
+package com.davidrajchenberg.taboolademo.view
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
-import com.taboola.taboolademo.ui.theme.TaboolaDemoTheme
-import com.taboola.taboolademo.viewmodel.HomeViewModel
+import com.davidrajchenberg.taboolademo.ui.theme.TaboolaDemoTheme
+import com.davidrajchenberg.taboolademo.viewmodel.HomeViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 

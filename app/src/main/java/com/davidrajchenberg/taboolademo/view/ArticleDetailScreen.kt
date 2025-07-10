@@ -1,4 +1,4 @@
-package com.taboola.taboolademo.view
+package com.davidrajchenberg.taboolademo.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -19,8 +19,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.glide.GlideImage
-import com.taboola.taboolademo.R
-import com.taboola.taboolademo.model.Article
+import com.davidrajchenberg.taboolademo.R
+import com.davidrajchenberg.taboolademo.model.Article
 
 @Composable
 fun ArticleDetailScreen(article: Article) {

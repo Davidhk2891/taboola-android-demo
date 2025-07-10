@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.taboola.taboolademo"
+    namespace = "com.davidrajchenberg.taboolademo"
     compileSdk = 36
 
     defaultConfig {
@@ -40,6 +40,10 @@ android {
 }
 
 dependencies {
+
+    // Taboola
+    implementation(libs.taboola.sdk)
+    implementation(libs.androidx.browser)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

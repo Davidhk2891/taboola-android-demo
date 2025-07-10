@@ -1,4 +1,4 @@
-package com.taboola.taboolademo.model
+package com.davidrajchenberg.taboolademo.model
 
 data class Article(
     val name: String,

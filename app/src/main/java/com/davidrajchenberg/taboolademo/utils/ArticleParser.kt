@@ -1,7 +1,7 @@
-package com.taboola.taboolademo.utils
+package com.davidrajchenberg.taboolademo.utils
 
 import android.util.Log
-import com.taboola.taboolademo.model.Article
+import com.davidrajchenberg.taboolademo.model.Article
 import org.json.JSONArray
 
 object ArticleParser {
